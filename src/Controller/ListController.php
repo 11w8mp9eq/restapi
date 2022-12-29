@@ -13,7 +13,6 @@ class ListController extends AbstractController
     #[Route('/lista', name: 'app_list')]
     public function index(ManagerRegistry $doctrine): Response
     {
-        //ob_start();
         echo "<a href='logout'>Logout</a><br><br>";
         $posts = $doctrine->getRepository(Post::class)->findAll();;
 
@@ -22,17 +21,6 @@ class ListController extends AbstractController
                 'No post found!'
             );
         }
-        $current_post = 0;
-        
-        /*foreach ($posts as $post){
-            echo "Name: ".$post->getName()."<br> ";
-            echo "Title: ".$post->getTitle()."<br> ";
-            echo "Body: ".$post->getBody()."<br>";
-            $current_post = $post->getId();
-            echo "<a href='lista/$current_post'>Delete</a><br><br>";
-        }*/
-        
-        //return new Response("<br> The end.");
 
         return $this->render('list/index.html.twig', ['posts' => $posts]);
 
@@ -52,5 +40,3 @@ class ListController extends AbstractController
             return new Response("Post with id: ".$id." deleted! Go back to <a href='.'>/lista</a><br><br>");
     }
 }
-
-        //ob_end_flush();
